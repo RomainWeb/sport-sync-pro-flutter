@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "661814595411",
+    "project_id": "sportsyncpro",
+    "storage_bucket": "sportsyncpro.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:661814595411:android:1a9487a612d3afa841dba6",
+        "android_client_info": {
+          "package_name": "com.example.sport_sync_pro"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "661814595411-7gnhrufqt3ru4p1qa50cppj0chpkv5nd.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA24R7-2akEPSEtPrh968Li0w15wQnVjFo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "661814595411-7gnhrufqt3ru4p1qa50cppj0chpkv5nd.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "661814595411-8l0e7u1de9rvrc0cdc50ooijq8kalob3.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.sportSyncPro"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
