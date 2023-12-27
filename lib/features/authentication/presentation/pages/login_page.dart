@@ -2,7 +2,10 @@ import 'package:auto_route/auto_route.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:sport_sync_pro/application/router/router.dart';
 import 'package:sport_sync_pro/application/utils/colors/colors.dart';
+import 'package:sport_sync_pro/features/authentication/data/datasource/firebase_auth_impl.dart';
 
 @RoutePage()
 class LoginPage extends StatefulWidget {
@@ -143,15 +146,15 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                 ),
                 const SizedBox(height: 16),
-                // IconButton(
-                //   onPressed: () async {
-                //     await Authentication.signInWithGoogle(context: context);
-                //   },
-                //   icon: const FaIcon(
-                //     FontAwesomeIcons.googlePlusG,
-                //     color: Colors.redAccent,
-                //   )
-                // ),
+                IconButton(
+                  onPressed: () async {
+                    await FirebaseAuthImpl.signInWithGoogle(context: context);
+                  },
+                  icon: const FaIcon(
+                    FontAwesomeIcons.googlePlusG,
+                    color: Colors.redAccent,
+                  )
+                ),
                 SizedBox(
                   width: double.infinity,
                   child: ElevatedButton(
@@ -169,27 +172,27 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                 ),
                 const SizedBox(height: 16),
-                // RichText(
-                //   text: TextSpan(
-                //     text: 'dont\'t have an account? ',
-                //     style: TextStyle(
-                //         fontWeight: FontWeight.w300,
-                //         color: Colors.grey.shade400,
-                //         fontSize: 16
-                //     ),
-                //     children: <TextSpan>[
-                //       TextSpan(
-                //           recognizer: TapGestureRecognizer()
-                //             ..onTap = () => AutoRouter.of(context).push(const AuthenticationRoute()),
-                //           text: 'Sign up',
-                //           style: const TextStyle(
-                //             fontWeight: FontWeight.bold,
-                //             color: AppColors.primaryColor,
-                //           )
-                //       ),
-                //     ],
-                //   ),
-                // )
+                RichText(
+                  text: TextSpan(
+                    text: 'dont\'t have an account? ',
+                    style: TextStyle(
+                        fontWeight: FontWeight.w300,
+                        color: Colors.grey.shade400,
+                        fontSize: 16
+                    ),
+                    children: <TextSpan>[
+                      TextSpan(
+                          recognizer: TapGestureRecognizer()
+                            ..onTap = () => AutoRouter.of(context).push(const AuthenticationRoute()),
+                          text: 'Sign up',
+                          style: const TextStyle(
+                            fontWeight: FontWeight.bold,
+                            color: AppColors.primaryColor,
+                          )
+                      ),
+                    ],
+                  ),
+                )
               ],
             ),
           ),

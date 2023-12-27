@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:sport_sync_pro/application/router/router.dart';
-import 'firebase_options.dart';
+import 'package:sport_sync_pro/firebase_options.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

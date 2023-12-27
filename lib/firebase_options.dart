@@ -47,7 +47,7 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyAkHLd_Juveu_nieOI919gDwW0ddMU_BzA',
+    apiKey: 'AIzaSyAVKSJWT8MGhwiRB1z2GVSDFpssO68WFdU',
     appId: '1:661814595411:web:3eec85a87600d90f41dba6',
     messagingSenderId: '661814595411',
     projectId: 'sportsyncpro',
@@ -57,7 +57,7 @@ class DefaultFirebaseOptions {
   );
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyA24R7-2akEPSEtPrh968Li0w15wQnVjFo',
+    apiKey: 'AIzaSyAKnHvY3U3uKYd0Lask7DEXpznBdCPS15I',
     appId: '1:661814595411:android:1a9487a612d3afa841dba6',
     messagingSenderId: '661814595411',
     projectId: 'sportsyncpro',
@@ -65,12 +65,11 @@ class DefaultFirebaseOptions {
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyCxmZy1lMDfE4P5ZBZ9ax6-Va0OALzyCo4',
+    apiKey: 'AIzaSyDu603d3EYGnagYWNqNUhtLS__2Wr2Dw6k',
     appId: '1:661814595411:ios:d4d77421edc71ba341dba6',
     messagingSenderId: '661814595411',
     projectId: 'sportsyncpro',
     storageBucket: 'sportsyncpro.appspot.com',
-    iosClientId: '661814595411-8l0e7u1de9rvrc0cdc50ooijq8kalob3.apps.googleusercontent.com',
     iosBundleId: 'com.example.sportSyncPro',
   );
 }
