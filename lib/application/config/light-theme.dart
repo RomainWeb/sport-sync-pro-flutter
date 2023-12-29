@@ -13,6 +13,11 @@ ThemeData lightTheme = ThemeData(
       color: AppColors.primaryColorDarker,
       fontSize: 28,
     ),
+    labelSmall: TextStyle(
+      fontWeight: FontWeight.w300,
+      color: AppColors.greyLight,
+      fontSize: 14,
+    ),
   ),
   appBarTheme: const AppBarTheme(
     color: AppColors.primaryColorDarker,
@@ -28,6 +33,31 @@ ThemeData lightTheme = ThemeData(
       elevation: MaterialStateProperty.all<double>(0),
       foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
       backgroundColor:  MaterialStateProperty.all<Color>(AppColors.secondaryColor),
+    ),
+  ),
+  inputDecorationTheme: InputDecorationTheme(
+    fillColor: const Color(0xffeff5fe),
+    filled: true,
+    labelStyle: const TextStyle(
+      color: AppColors.primaryColorDarker,
+    ),
+    border: OutlineInputBorder(
+      borderRadius: BorderRadius.circular(12),
+      borderSide: BorderSide.none,
+    ),
+    enabledBorder: OutlineInputBorder(
+      borderRadius: BorderRadius.circular(12),
+      borderSide: BorderSide.none,
+    ),
+    focusedBorder: OutlineInputBorder(
+      borderRadius: BorderRadius.circular(12),
+      borderSide: const BorderSide(
+        color: AppColors.primaryColor,
+      )
+    ),
+    hintStyle: const TextStyle(
+      color: Colors.grey,
+      fontWeight: FontWeight.w400,
     ),
   ),
   colorScheme: ColorScheme.fromSeed(seedColor: AppColors.primaryColor),

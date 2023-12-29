@@ -41,9 +41,16 @@ class _LoginPageState extends State<LoginPage> {
 
     return Scaffold(
       backgroundColor: Colors.white,
+      appBar: AppBar(
+        backgroundColor: Colors.white,
+        elevation: 0,
+        leading: const BackButton(
+          color: AppColors.primaryColor,
+        ),
+      ),
       body: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 100),
+          padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 30),
           child: Center(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -74,33 +81,12 @@ class _LoginPageState extends State<LoginPage> {
                 ),
                 TextField(
                   controller: emailController,
-                  style: const TextStyle(
-                    color: AppColors.primaryColorDarker,
-                    fontWeight: FontWeight.bold,
-                  ),
-                  decoration: InputDecoration(
-                    suffixIcon: const Icon(
+                  decoration: const InputDecoration(
+                    suffixIcon: Icon(
                       Icons.email_outlined,
                       color: AppColors.greyLight,
                     ),
-                    enabledBorder: OutlineInputBorder(
-                      borderSide: const BorderSide(color: Colors.white),
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                    focusedBorder: OutlineInputBorder(
-                        borderSide: const BorderSide(
-                            color: AppColors.primaryColor
-                        ),
-                        borderRadius: BorderRadius.circular(12)
-                    ),
-                    border: InputBorder.none,
                     hintText: 'Enter your email',
-                    hintStyle: TextStyle(
-                      color: Colors.grey[400],
-                      fontWeight: FontWeight.w400,
-                    ),
-                    fillColor: const Color(0xffeff5fe),
-                    filled: true,
                   ),
                 ),
                 const SizedBox(height: 16),
@@ -121,40 +107,15 @@ class _LoginPageState extends State<LoginPage> {
                   obscureText: true,
                   enableSuggestions: false,
                   autocorrect: false,
-                  style: const TextStyle(
-                    color: AppColors.primaryColorDarker,
-                    fontWeight: FontWeight.bold,
-                  ),
-                  decoration: InputDecoration(
-                    suffixIcon: const Icon(
+                  decoration: const InputDecoration(
+                    suffixIcon: Icon(
                       Icons.password,
                       color: AppColors.greyLight,
                     ),
-                    enabledBorder: OutlineInputBorder(
-                      borderSide: const BorderSide(color: Colors.white),
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                    focusedBorder: OutlineInputBorder(
-                        borderSide: const BorderSide(color: AppColors.primaryColor),
-                        borderRadius: BorderRadius.circular(12)
-                    ),
-                    border: InputBorder.none,
                     hintText: 'Enter your password',
-                    hintStyle: TextStyle(color: Colors.grey[400], fontWeight: FontWeight.w400, ),
-                    fillColor: const Color(0xffeff5fe),
-                    filled: true,
                   ),
                 ),
                 const SizedBox(height: 16),
-                IconButton(
-                  onPressed: () async {
-                    await FirebaseAuthImpl.signInWithGoogle(context: context);
-                  },
-                  icon: const FaIcon(
-                    FontAwesomeIcons.googlePlusG,
-                    color: Colors.redAccent,
-                  )
-                ),
                 SizedBox(
                   width: double.infinity,
                   child: ElevatedButton(
@@ -192,7 +153,7 @@ class _LoginPageState extends State<LoginPage> {
                       ),
                     ],
                   ),
-                )
+                ),
               ],
             ),
           ),
