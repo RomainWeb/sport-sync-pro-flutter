@@ -1,6 +1,4 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:sport_sync_pro/application/exceptions/auth_exceptions_handler.dart';
 import 'package:sport_sync_pro/application/router/router.dart';
@@ -9,48 +7,37 @@ import 'package:sport_sync_pro/features/authentication/data/datasource/firebase_
 import 'package:sport_sync_pro/features/common/presentation/widgets/snackbar.dart';
 
 @RoutePage()
-class LoginPage extends StatefulWidget {
-  const LoginPage({super.key});
+class ResetPasswordPage extends StatefulWidget {
+  const ResetPasswordPage({super.key});
 
   @override
-  State<LoginPage> createState() => _LoginPageState();
+  State<ResetPasswordPage> createState() => _ResetPasswordPageState();
 }
 
-class _LoginPageState extends State<LoginPage> {
+class _ResetPasswordPageState extends State<ResetPasswordPage> {
+  final emailController = TextEditingController();
+  final authService = FirebaseAuthImpl();
+
+  Future<void> resetPassword() async {
+    final status = await authService.resetPassword(
+      email: emailController.text.trim(),
+    );
+    if (status == AuthStatus.successful) {
+      CustomSnackBar.showSuccessSnackBar(
+        context,
+        message: 'Reset password link sent to your email',
+      );
+    } else {
+      final error = AuthExceptionHandler.generateErrorMessage(status);
+      CustomSnackBar.showErrorSnackBar(
+        context,
+        message: error,
+      );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
-    final emailController = TextEditingController();
-    final passwordController = TextEditingController();
-    final authService = FirebaseAuthImpl();
-
-    Future<void> login() async {
-      final status = await authService.login(
-        email: emailController.text.trim(),
-        password: passwordController.text,
-      );
-      if (status == AuthStatus.successful) {
-        User? user = FirebaseAuth.instance.currentUser;
-        if (user != null && !user.emailVerified) {
-          AutoRouter.of(context).push(const VerifyEmailRoute());
-        } else {
-          AutoRouter.of(context).push(const HomeRoute());
-        }
-      } else {
-        final error = AuthExceptionHandler.generateErrorMessage(status);
-        CustomSnackBar.showErrorSnackBar(
-          context,
-          message: error,
-        );
-      }
-    }
-
-    @override
-    void dispose() {
-      emailController.dispose();
-      passwordController.dispose();
-      super.dispose();
-    }
-
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
@@ -116,36 +103,6 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                   ],
                 ),
-                TextField(
-                  controller: passwordController,
-                  obscureText: true,
-                  enableSuggestions: false,
-                  autocorrect: false,
-                  decoration: const InputDecoration(
-                    suffixIcon: Icon(
-                      Icons.password,
-                      color: AppColors.greyLight,
-                    ),
-                    hintText: 'Enter your password',
-                  ),
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    Padding(
-                      padding: EdgeInsets.all(8.0),
-                      child: GestureDetector(
-                        onTap: () => AutoRouter.of(context).push(const ResetPasswordRoute()),
-                        child: Text('Forgot password?', style: TextStyle(
-                          color: AppColors.primaryColorLighter,
-                          fontSize: 14,
-                          fontWeight: FontWeight.bold,
-                        )),
-                      ),
-                    ),
-                  ],
-                ),
-                const SizedBox(height: 16),
                 SizedBox(
                   width: double.infinity,
                   child: ElevatedButton(
@@ -158,30 +115,8 @@ class _LoginPageState extends State<LoginPage> {
                       backgroundColor: MaterialStateProperty.all<Color>(AppColors.secondaryColor),
                       padding: MaterialStateProperty.all<EdgeInsets>(const EdgeInsets.symmetric(horizontal: 32, vertical: 16)),
                     ),
-                    onPressed: login,
-                    child: const Text('LOGIN'),
-                  ),
-                ),
-                const SizedBox(height: 16),
-                RichText(
-                  text: TextSpan(
-                    text: 'dont\'t have an account? ',
-                    style: TextStyle(
-                        fontWeight: FontWeight.w300,
-                        color: Colors.grey.shade400,
-                        fontSize: 16
-                    ),
-                    children: <TextSpan>[
-                      TextSpan(
-                          recognizer: TapGestureRecognizer()
-                            ..onTap = () => AutoRouter.of(context).push(const AuthenticationRoute()),
-                          text: 'Sign up',
-                          style: const TextStyle(
-                            fontWeight: FontWeight.bold,
-                            color: AppColors.primaryColor,
-                          )
-                      ),
-                    ],
+                    onPressed: resetPassword,
+                    child: const Text('SEND LINK'),
                   ),
                 ),
               ],

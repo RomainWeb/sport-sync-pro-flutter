@@ -6,6 +6,7 @@ import '../../features/authentication/presentation/pages/authentication_page.dar
 import '../../features/user/presentation/pages/user_profile_page.dart';
 import '../../features/authentication/presentation/pages/register_page.dart';
 import '../../features/authentication/presentation/pages/verify_email_page.dart';
+import '../../features/authentication/presentation/pages/reset_password_page.dart';
 
 part 'router.gr.dart';
 
@@ -18,6 +19,7 @@ class AppRouter extends _$AppRouter {
     AutoRoute(path: '/login', page: LoginRoute.page),
     AutoRoute(path: '/register', page: RegisterRoute.page),
     AutoRoute(path: '/verify-email', page: VerifyEmailRoute.page),
+    AutoRoute(path: '/forgot-password', page: ResetPasswordRoute.page),
     AutoRoute(path: '/auth', page: AuthenticationRoute.page),
     AutoRoute(path: '/profile', page: UserProfileRoute.page, guards: [AuthGuard()]),
   ];
