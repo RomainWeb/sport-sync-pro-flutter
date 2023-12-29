@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
+import 'package:sport_sync_pro/application/exceptions/auth_exceptions_handler.dart';
 
 class FirebaseProvidersAuthImpl {
   static SnackBar customSnackBar({required String content}) {
@@ -44,14 +45,18 @@ class FirebaseProvidersAuthImpl {
     final GoogleSignInAccount? googleAccount = await googleSignIn.signIn();
 
     if (googleAccount != null) {
-      final userCredential = await signInWithGoogleAccount(
-          auth, googleAccount, context);
-      return userCredential?.user;
+      var authStatus = await signInWithGoogleAccount(auth, googleAccount, context);
+      if (authStatus == AuthStatus.successful) {
+        return auth.currentUser;
+      } else {
+        var showSnackBar = ScaffoldMessenger.of(context).showSnackBar(
+            customSnackBar(content: AuthExceptionHandler.generateErrorMessage(authStatus)));
+      }
     }
     return null;
   }
 
-  static Future<UserCredential?> signInWithGoogleAccount(FirebaseAuth auth,
+  static Future<AuthStatus> signInWithGoogleAccount(FirebaseAuth auth,
       GoogleSignInAccount googleAccount, BuildContext context) async {
     try {
       final GoogleSignInAuthentication googleAuth = await googleAccount
@@ -61,36 +66,14 @@ class FirebaseProvidersAuthImpl {
         idToken: googleAuth.idToken,
       );
 
-      final UserCredential userCredential = await auth.signInWithCredential(
-          credential);
+      await auth.signInWithCredential(credential);
 
       AutoRouter.of(context).pushNamed('/');
-      return userCredential;
+      return AuthStatus.successful;
     } on FirebaseAuthException catch (e) {
-      handleFirebaseAuthException(e, context);
-      return null;
+      return AuthExceptionHandler.handleAuthException(e);
     } catch (e) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        FirebaseProvidersAuthImpl.customSnackBar(
-          content: 'Error occurred using Google Sign In. Try again.',
-        ),
-      );
-      return null;
+      return AuthStatus.unknown;
     }
-  }
-
-  static void handleFirebaseAuthException(FirebaseAuthException e,
-      BuildContext context) {
-    String content = '';
-    if (e.code == 'account-exists-with-different-credential') {
-      content = 'The account already exists with a different credential';
-    } else if (e.code == 'invalid-credential') {
-      content = 'Error occurred while accessing credentials. Try again.';
-    }
-    ScaffoldMessenger.of(context).showSnackBar(
-      FirebaseProvidersAuthImpl.customSnackBar(
-        content: content,
-      ),
-    );
   }
 }

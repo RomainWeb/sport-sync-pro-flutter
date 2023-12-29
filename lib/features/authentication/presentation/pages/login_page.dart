@@ -2,8 +2,11 @@ import 'package:auto_route/auto_route.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:sport_sync_pro/application/exceptions/auth_exceptions_handler.dart';
 import 'package:sport_sync_pro/application/router/router.dart';
 import 'package:sport_sync_pro/application/utils/colors/colors.dart';
+import 'package:sport_sync_pro/features/authentication/data/datasource/firebase_auth_impl.dart';
+import 'package:sport_sync_pro/features/common/presentation/widgets/snackbar.dart';
 
 @RoutePage()
 class LoginPage extends StatefulWidget {
@@ -18,24 +21,26 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     final emailController = TextEditingController();
     final passwordController = TextEditingController();
+    final authService = FirebaseAuthImpl();
 
     Future<void> login() async {
-      try {
-        await FirebaseAuth.instance.signInWithEmailAndPassword(
-          email: emailController.text.trim(),
-          password: passwordController.text.trim(),
-        );
-
+      final status = await authService.login(
+        email: emailController.text.trim(),
+        password: passwordController.text,
+      );
+      if (status == AuthStatus.successful) {
         User? user = FirebaseAuth.instance.currentUser;
-
         if (user != null && !user.emailVerified) {
           AutoRouter.of(context).push(const VerifyEmailRoute());
         } else {
           AutoRouter.of(context).push(const HomeRoute());
         }
-
-      } catch(e) {
-        print(e);
+      } else {
+        final error = AuthExceptionHandler.generateErrorMessage(status);
+        CustomSnackBar.showErrorSnackBar(
+          context,
+          message: error,
+        );
       }
     }
 
