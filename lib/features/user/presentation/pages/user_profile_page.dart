@@ -14,18 +14,9 @@ class UserProfilePage extends StatelessWidget {
     return Scaffold(
       body: Center(
         child: ElevatedButton(
-          style: ButtonStyle(
-            backgroundColor: MaterialStateProperty.all<Color>(AppColors.secondaryColor),
-            padding: MaterialStateProperty.all<EdgeInsets>(
-                const EdgeInsets.symmetric(
-                    horizontal: 32,
-                    vertical: 16
-                )
-            ),
-          ),
           onPressed: () async {
             await FirebaseAuth.instance.signOut();
-            AutoRouter.of(context).push(const LoginRoute());
+            AutoRouter.of(context).push(const AuthenticationRoute());
           },
           child: const Text('LOG OUT'),
         ),

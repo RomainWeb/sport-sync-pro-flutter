@@ -20,12 +20,10 @@ class TopNavBar extends StatelessWidget implements PreferredSizeWidget {
   Widget build(BuildContext context) {
     return AppBar(
         title: Text(title),
-        backgroundColor: AppColors.primaryColorDarker,
         elevation: 0,
         actions: [
           IconButton(
             icon: const FaIcon(FontAwesomeIcons.user),
-            color: Colors.white,
             iconSize: 16.0,
             padding: const EdgeInsets.symmetric(horizontal: 24.0),
             onPressed: () => {
