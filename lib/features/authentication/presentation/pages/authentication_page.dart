@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:sport_sync_pro/application/router/router.dart';
 import 'package:sport_sync_pro/application/utils/colors/colors.dart';
-import 'package:sport_sync_pro/features/authentication/data/datasource/firebase_auth_impl.dart';
+import 'package:sport_sync_pro/features/authentication/data/datasource/firebase_providers_auth_impl.dart';
 import 'package:sport_sync_pro/features/authentication/presentation/pages/login_page.dart';
 
 @RoutePage()
@@ -45,7 +45,7 @@ class AuthenticationPage extends StatelessWidget {
                 foregroundColor: AppColors.primaryColorDarker,
                 minimumSize: const Size(double.infinity, 48),
               ),
-              onPressed: () {},
+              onPressed: () { AutoRouter.of(context).push(const RegisterRoute());},
               child: const Text(
                   'sign up'
               )
@@ -62,7 +62,7 @@ class AuthenticationPage extends StatelessWidget {
               backgroundColor: MaterialStateProperty.all<Color>(Colors.redAccent),
             ),
             onPressed: () async {
-              await FirebaseAuthImpl.signInWithGoogle(context: context);
+              await FirebaseProvidersAuthImpl.signInWithGoogle(context: context);
             },
             icon: const FaIcon(
               FontAwesomeIcons.googlePlusG,

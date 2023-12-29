@@ -9,6 +9,7 @@ class AuthGuard extends AutoRouteGuard {
     User? user = FirebaseAuth.instance.currentUser;
 
     if(user != null){
+      print(user);
       // if user is authenticated we continue
       resolver.next(true);
     }else{

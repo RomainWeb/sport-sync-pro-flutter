@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
 
-class FirebaseAuthImpl {
+class FirebaseProvidersAuthImpl {
   static SnackBar customSnackBar({required String content}) {
     return SnackBar(
       backgroundColor: Colors.black,
@@ -71,7 +71,7 @@ class FirebaseAuthImpl {
       return null;
     } catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(
-        FirebaseAuthImpl.customSnackBar(
+        FirebaseProvidersAuthImpl.customSnackBar(
           content: 'Error occurred using Google Sign In. Try again.',
         ),
       );
@@ -88,7 +88,7 @@ class FirebaseAuthImpl {
       content = 'Error occurred while accessing credentials. Try again.';
     }
     ScaffoldMessenger.of(context).showSnackBar(
-      FirebaseAuthImpl.customSnackBar(
+      FirebaseProvidersAuthImpl.customSnackBar(
         content: content,
       ),
     );

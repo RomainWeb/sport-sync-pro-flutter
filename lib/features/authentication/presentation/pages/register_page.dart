@@ -2,31 +2,31 @@ import 'package:auto_route/auto_route.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:sport_sync_pro/application/router/router.dart';
 import 'package:sport_sync_pro/application/utils/colors/colors.dart';
-import 'package:sport_sync_pro/features/authentication/data/datasource/firebase_providers_auth_impl.dart';
 
 @RoutePage()
-class LoginPage extends StatefulWidget {
-  const LoginPage({super.key});
+class RegisterPage extends StatefulWidget {
+  const RegisterPage({super.key});
 
   @override
-  State<LoginPage> createState() => _LoginPageState();
+  State<RegisterPage> createState() => _RegisterPageState();
 }
 
-class _LoginPageState extends State<LoginPage> {
+class _RegisterPageState extends State<RegisterPage> {
   @override
   Widget build(BuildContext context) {
     final emailController = TextEditingController();
     final passwordController = TextEditingController();
+    final displayNameController = TextEditingController();
 
-    Future<void> login() async {
+    Future<void> register() async {
       try {
-        await FirebaseAuth.instance.signInWithEmailAndPassword(
+        await FirebaseAuth.instance.createUserWithEmailAndPassword(
           email: emailController.text.trim(),
           password: passwordController.text.trim(),
         );
+        await FirebaseAuth.instance.currentUser!.updateDisplayName(displayNameController.text.trim());
 
         AutoRouter.of(context).push(const HomeRoute());
       } catch(e) {
@@ -38,6 +38,7 @@ class _LoginPageState extends State<LoginPage> {
     void dispose() {
       emailController.dispose();
       passwordController.dispose();
+      displayNameController.dispose();
       super.dispose();
     }
 
@@ -49,8 +50,7 @@ class _LoginPageState extends State<LoginPage> {
         leading: BackButton(
           color: AppColors.primaryColor,
           onPressed: () => { AutoRouter.of(context).push(const AuthenticationRoute())},
-        ),
-
+      ),
       ),
       body: SingleChildScrollView(
         child: Padding(
@@ -60,7 +60,7 @@ class _LoginPageState extends State<LoginPage> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 const Text(
-                    'LOGIN',
+                    'REGISTER',
                     style: TextStyle(
                         fontSize: 22,
                         fontWeight: FontWeight.bold,
@@ -71,6 +71,29 @@ class _LoginPageState extends State<LoginPage> {
                   'assets/images/login-illustration.jpg',
                   width: 220,
                 ),
+                const Row(
+                  children: [
+                    Padding(
+                      padding: EdgeInsets.all(8.0),
+                      child: Text('Full name', style: TextStyle(
+                        color: AppColors.primaryColorLighter,
+                        fontSize: 14,
+                        fontWeight: FontWeight.bold,
+                      )),
+                    ),
+                  ],
+                ),
+                TextField(
+                  controller: displayNameController,
+                  decoration: const InputDecoration(
+                    suffixIcon: Icon(
+                      Icons.email_outlined,
+                      color: AppColors.greyLight,
+                    ),
+                    hintText: 'Enter your full name',
+                  ),
+                ),
+                const SizedBox(height: 16),
                 const Row(
                   children: [
                     Padding(
@@ -132,14 +155,14 @@ class _LoginPageState extends State<LoginPage> {
                       backgroundColor: MaterialStateProperty.all<Color>(AppColors.secondaryColor),
                       padding: MaterialStateProperty.all<EdgeInsets>(const EdgeInsets.symmetric(horizontal: 32, vertical: 16)),
                     ),
-                    onPressed: login,
-                    child: const Text('LOGIN'),
+                    onPressed: register,
+                    child: const Text('REGISTER'),
                   ),
                 ),
                 const SizedBox(height: 16),
                 RichText(
                   text: TextSpan(
-                    text: 'dont\'t have an account? ',
+                    text: 'Already have an account?',
                     style: TextStyle(
                         fontWeight: FontWeight.w300,
                         color: Colors.grey.shade400,
@@ -148,7 +171,7 @@ class _LoginPageState extends State<LoginPage> {
                     children: <TextSpan>[
                       TextSpan(
                           recognizer: TapGestureRecognizer()
-                            ..onTap = () => AutoRouter.of(context).push(const AuthenticationRoute()),
+                            ..onTap = () => AutoRouter.of(context).push(const LoginRoute()),
                           text: 'Sign up',
                           style: const TextStyle(
                             fontWeight: FontWeight.bold,
