@@ -8,7 +8,7 @@ class AuthGuard extends AutoRouteGuard {
   void onNavigation(NavigationResolver resolver, StackRouter router) {
     User? user = FirebaseAuth.instance.currentUser;
 
-    if(user != null){
+    if(user != null || user?.emailVerified == false){
       print(user);
       // if user is authenticated we continue
       resolver.next(true);

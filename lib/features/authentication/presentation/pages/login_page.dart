@@ -2,10 +2,8 @@ import 'package:auto_route/auto_route.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:sport_sync_pro/application/router/router.dart';
 import 'package:sport_sync_pro/application/utils/colors/colors.dart';
-import 'package:sport_sync_pro/features/authentication/data/datasource/firebase_providers_auth_impl.dart';
 
 @RoutePage()
 class LoginPage extends StatefulWidget {
@@ -28,7 +26,14 @@ class _LoginPageState extends State<LoginPage> {
           password: passwordController.text.trim(),
         );
 
-        AutoRouter.of(context).push(const HomeRoute());
+        User? user = FirebaseAuth.instance.currentUser;
+
+        if (user != null && !user.emailVerified) {
+          AutoRouter.of(context).push(const VerifyEmailRoute());
+        } else {
+          AutoRouter.of(context).push(const HomeRoute());
+        }
+
       } catch(e) {
         print(e);
       }
