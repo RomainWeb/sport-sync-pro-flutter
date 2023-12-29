@@ -33,7 +33,7 @@ class _LoginPageState extends State<LoginPage> {
         if (user != null && !user.emailVerified) {
           AutoRouter.of(context).push(const VerifyEmailRoute());
         } else {
-          AutoRouter.of(context).push(const HomeRoute());
+          AutoRouter.of(context).pushAndPopUntil(const HomeRoute(), predicate: (Route<dynamic> route) { return false; });
         }
       } else {
         final error = AuthExceptionHandler.generateErrorMessage(status);

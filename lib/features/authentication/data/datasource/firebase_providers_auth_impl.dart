@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:sport_sync_pro/application/exceptions/auth_exceptions_handler.dart';
+import 'package:sport_sync_pro/application/router/router.dart';
 
 class FirebaseProvidersAuthImpl {
   static SnackBar customSnackBar({required String content}) {
@@ -68,7 +69,7 @@ class FirebaseProvidersAuthImpl {
 
       await auth.signInWithCredential(credential);
 
-      AutoRouter.of(context).pushNamed('/');
+      AutoRouter.of(context).pushAndPopUntil(const HomeRoute(), predicate: (Route<dynamic> route) { return false; });
       return AuthStatus.successful;
     } on FirebaseAuthException catch (e) {
       return AuthExceptionHandler.handleAuthException(e);
