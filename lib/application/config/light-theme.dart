@@ -18,6 +18,11 @@ ThemeData lightTheme = ThemeData(
       color: AppColors.greyLight,
       fontSize: 14,
     ),
+    labelMedium: TextStyle(
+      fontWeight: FontWeight.w400,
+      color: AppColors.greyLight,
+      fontSize: 16,
+    ),
   ),
   appBarTheme: const AppBarTheme(
     color: Colors.white,

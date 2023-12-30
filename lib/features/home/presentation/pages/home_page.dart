@@ -2,7 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:sport_sync_pro/features/common/presentation/widgets/bottom_nav_bar.dart';
-import 'package:sport_sync_pro/features/common/presentation/widgets/top_nav_bar.dart';
+import 'package:sport_sync_pro/features/today/presentation/pages/resume_today_page.dart';
 
 @RoutePage()
 class HomePage extends StatefulWidget {
@@ -23,7 +23,7 @@ class _HomePageState extends State<HomePage> {
   }
 
   final List<Widget> _pages = [
-    Text('page 1'),
+    const ResumeTodayPage(),
     Text('page 2'),
     Text('page 3')
   ];
@@ -37,6 +37,7 @@ class _HomePageState extends State<HomePage> {
           child: _pages.elementAt(_selectedIndex),
         ),
         bottomNavigationBar: BottomNavBar(
+          selectedIndex: _selectedIndex,
           onTabChange: navigationBottomBar,
         )
     );

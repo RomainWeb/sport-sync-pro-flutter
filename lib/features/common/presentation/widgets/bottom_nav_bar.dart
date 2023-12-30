@@ -5,7 +5,8 @@ import 'package:sport_sync_pro/application/utils/colors/colors.dart';
 
 class BottomNavBar extends StatelessWidget {
   void Function(int)? onTabChange;
-  BottomNavBar({super.key, required this.onTabChange});
+  int selectedIndex = 0;
+  BottomNavBar({super.key, required this.selectedIndex, required this.onTabChange});
 
   @override
   Widget build(BuildContext context) {
@@ -13,7 +14,7 @@ class BottomNavBar extends StatelessWidget {
       padding: const EdgeInsets.symmetric(vertical: 20.0),
       child: GNav(
         color: AppColors.primaryColorLighter,
-        selectedIndex: 1,
+        selectedIndex: selectedIndex,
         activeColor: AppColors.primaryColorDarker,
         tabActiveBorder: Border.all(color: Colors.white),
         tabBackgroundColor: Colors.grey.shade100,
@@ -24,12 +25,12 @@ class BottomNavBar extends StatelessWidget {
         onTabChange: (value) => onTabChange!(value),
         tabs: const [
           GButton(
-            icon: FontAwesomeIcons.peopleGroup,
-            text: 'Groupes',
+            icon: FontAwesomeIcons.calendarDay,
+            text: 'Aujourd\'hui',
           ),
           GButton(
-            icon: FontAwesomeIcons.calendarDay,
-            text: 'Calendrier',
+            icon: FontAwesomeIcons.peopleGroup,
+            text: 'Groupes',
           ),
           GButton(
             icon: FontAwesomeIcons.clock,
