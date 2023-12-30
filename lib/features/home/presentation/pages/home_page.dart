@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:sport_sync_pro/features/common/presentation/widgets/bottom_nav_bar.dart';
 import 'package:sport_sync_pro/features/common/presentation/widgets/top_nav_bar.dart';
@@ -29,8 +30,9 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+     User? user = FirebaseAuth.instance.currentUser;
+
     return Scaffold(
-        appBar: TopNavBar(),
         body: Center(
           child: _pages.elementAt(_selectedIndex),
         ),

@@ -20,8 +20,18 @@ ThemeData lightTheme = ThemeData(
     ),
   ),
   appBarTheme: const AppBarTheme(
-    color: AppColors.primaryColorDarker,
-    iconTheme: IconThemeData(color: Colors.white),
+    color: Colors.white,
+    titleTextStyle: TextStyle(
+      color: AppColors.primaryColorDarker,
+      fontSize: 18,
+      fontWeight: FontWeight.w600,
+    ),
+    toolbarTextStyle: TextStyle(
+      color: AppColors.primaryColorDarker,
+      fontSize: 16,
+      fontWeight: FontWeight.w400,
+    ),
+    iconTheme: IconThemeData(color: AppColors.primaryColorDarker),
   ),
   elevatedButtonTheme: ElevatedButtonThemeData(
     style: ButtonStyle(
@@ -60,5 +70,8 @@ ThemeData lightTheme = ThemeData(
       fontWeight: FontWeight.w400,
     ),
   ),
-  colorScheme: ColorScheme.fromSeed(seedColor: AppColors.primaryColor),
+  colorScheme: ColorScheme.fromSeed(
+    background: Colors.white,
+    seedColor: AppColors.primaryColor
+  ),
 );

@@ -6,10 +6,12 @@ import 'package:sport_sync_pro/features/user/presentation/pages/user_profile_pag
 
 class TopNavBar extends StatelessWidget implements PreferredSizeWidget {
   final String title;
+  final String subtitle;
 
   TopNavBar({
     super.key,
     this.title = '',
+    this.subtitle = '',
   });
 
 
@@ -20,6 +22,7 @@ class TopNavBar extends StatelessWidget implements PreferredSizeWidget {
   Widget build(BuildContext context) {
     return AppBar(
         title: Text(title),
+        centerTitle: false,
         elevation: 0,
         actions: [
           IconButton(
