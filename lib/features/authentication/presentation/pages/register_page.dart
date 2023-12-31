@@ -79,7 +79,7 @@ class _RegisterPageState extends State<RegisterPage> {
                 ),
                 Image.asset(
                   'assets/images/login-illustration.jpg',
-                  width: 220,
+                  width: 140,
                 ),
                 const Row(
                   children: [
@@ -172,7 +172,7 @@ class _RegisterPageState extends State<RegisterPage> {
                 const SizedBox(height: 16),
                 RichText(
                   text: TextSpan(
-                    text: 'Already have an account?',
+                    text: 'Already have an account? ',
                     style: TextStyle(
                         fontWeight: FontWeight.w300,
                         color: Colors.grey.shade400,
@@ -182,9 +182,9 @@ class _RegisterPageState extends State<RegisterPage> {
                       TextSpan(
                           recognizer: TapGestureRecognizer()
                             ..onTap = () => AutoRouter.of(context).push(const LoginRoute()),
-                          text: 'Sign up',
+                          text: 'Sign in',
                           style: const TextStyle(
-                            fontWeight: FontWeight.bold,
+                            fontWeight: FontWeight.w300,
                             color: AppColors.primaryColor,
                           )
                       ),

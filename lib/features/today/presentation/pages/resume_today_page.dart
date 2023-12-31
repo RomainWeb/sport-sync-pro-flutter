@@ -1,8 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:sport_sync_pro/application/utils/colors/colors.dart';
 import 'package:sport_sync_pro/features/common/presentation/widgets/top_nav_bar.dart';
+import 'package:sport_sync_pro/features/today/presentation/widgets/day_date_picker.dart';
 import 'package:sport_sync_pro/features/today/presentation/widgets/weather.dart';
 
 class ResumeTodayPage extends StatelessWidget {
@@ -39,7 +38,7 @@ class ResumeTodayPage extends StatelessWidget {
                 ],
               ),
             ),
-            const SizedBox(height: 24),
+            const DayDatePicker(),
             const WeatherToday(),
           ],
         ),

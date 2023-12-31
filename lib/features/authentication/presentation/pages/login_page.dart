@@ -79,7 +79,7 @@ class _LoginPageState extends State<LoginPage> {
                 ),
                 Image.asset(
                   'assets/images/login-illustration.jpg',
-                  width: 220,
+                  width: 140,
                 ),
                 const Row(
                   children: [

@@ -24,16 +24,16 @@ class WeatherToday extends StatelessWidget {
                     height: 135.0,
                     width: 60.0,
                     decoration: const BoxDecoration(
-                      borderRadius: BorderRadius.all(Radius.circular(50.0)),
-                      color: AppColors.primaryColorLighter,
+                      borderRadius: BorderRadius.all(Radius.circular(16.0)),
+                      color: AppColors.primaryColor,
                     ),
-                    child: const Column(
+                    child: Column(
                       children: [
-                        Text('12 am', style: TextStyle(color: Colors.white, fontSize: 12.0),),
-                        SizedBox(height: 16.0,),
-                        Icon(FontAwesomeIcons.wind, color: Colors.white, size: 28.0,),
-                        SizedBox(height: 16.0,),
-                        Text('19°c', style: TextStyle(color: Colors.white, fontSize: 16.0, fontWeight: FontWeight.w600),),
+                        Text('${10 + item} am', style: const TextStyle(color: Colors.white, fontSize: 12.0),),
+                        const SizedBox(height: 16.0,),
+                        const Icon(FontAwesomeIcons.wind, color: Colors.white, size: 28.0,),
+                        const SizedBox(height: 16.0,),
+                        const Text('19°c', style: TextStyle(color: Colors.white, fontSize: 16.0, fontWeight: FontWeight.w600),),
                       ],
                     ),
                   ),
