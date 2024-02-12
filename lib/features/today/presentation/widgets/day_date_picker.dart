@@ -100,7 +100,7 @@ class _DayDatePickerState extends State<DayDatePicker> {
               ),
               onTap: () async {
                 await _controller.animateTo(
-                  index * 50,
+                  index * 54,
                   duration: const Duration(milliseconds: 500),
                   curve: Curves.easeInOut,
                 );
